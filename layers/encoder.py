@@ -127,9 +127,9 @@ class LexiconEncoder(nn.Module):
         self.ContextualEmbed = ContextualEmbed(config['cove_path'], config['vocab_size'], embedding=embedding, padding_idx=padding_idx)
         return self.ContextualEmbed.output_size
 
-    # Add the elmo embeddings 
+    # Add the elmo embeddings
     def create_elmo(self, config):
-        elmo_on = config.get('elmo_on', False)
+        elmo_on = config['elmo_on']
         num_layer = config['contextual_num_layers']
         if config['elmo_att_on']: num_layer += 1
         if config['elmo_self_att_on']: num_layer += 1

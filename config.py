@@ -17,8 +17,8 @@ def set_args():
     parser.add_argument('--embed_size', type=int, default=300)  # glove 300d
     parser.add_argument('--char_emb_dim', type=int, default=8)
     parser.add_argument('--hidden_size', type=int, default=300)
-    parser.add_argument('--contextual_num_layers', type=int, default=3) 
-    
+    parser.add_argument('--contextual_num_layers', type=int, default=3)
+
     parser.add_argument('--lstm_layers', type=int, default=1)
 
     parser.add_argument('--dropout_emb', type=float, default=0.3)
@@ -46,9 +46,9 @@ def set_args():
     parser.add_argument('--n_eval', type=int, default=512)
     parser.add_argument('--use_tag',  action='store_true', default=True)
     parser.add_argument('--use_ner',  action='store_true', default=True)
-    
+
     # Add Elmo
-    parser.add_argument('--elmo_on', action='store_true')
+    parser.add_argument('--elmo_on', action='store_true', default=True)
     parser.add_argument('--elmo_config_path', default='data/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json')
     parser.add_argument('--elmo_weight_path', default='data/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5')
     parser.add_argument('--elmo_size', type=int, default=1024)
