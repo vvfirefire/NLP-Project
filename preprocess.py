@@ -10,13 +10,12 @@ from util.logger import create_logger
 
 
 columns = ['id', 'question','answer_sentence', 'answer', 'is_impossible']
-USER_DIR = os.path.expanduser('~')
 
 
 def main():
     logger = create_logger(__name__)
     parser = argparse.ArgumentParser()
-    parser.add_argument('--glove_path', type=str, default=os.path.join(USER_DIR, "data/glove.840B.300d.txt"))
+    parser.add_argument('--glove_path', type=str, default="data/glove.840B.300d.txt")
     parser.add_argument('--train_path', type=str, default="data/squad_train_v.csv")
     parser.add_argument('--test_path',type=str, default="data/squad_dev_v.csv")
     parser.add_argument('--meta_path', type=str, default="resource/meta.pkl")
