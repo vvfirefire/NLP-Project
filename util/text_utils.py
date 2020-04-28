@@ -99,6 +99,7 @@ class Vocabulary(object):
 
 
 def build_vocab(data, embedding_vocab, threads=24, tagner_on = False):
+    # Use Spacy for building up the POS tagging and NER for tokens inside the data
     if tagner_on:
         nlp = spacy.load('en', disable=['vectors', 'textcat', 'parser'])
     else:
@@ -114,6 +115,8 @@ def build_vocab(data, embedding_vocab, threads=24, tagner_on = False):
     counter = Counter()
     tag_counter = Counter()
     ner_counter = Counter()
+
+    # Get the corresponding tag and ner for building up the tag and ner vocabulary 
     for sent in tqdm(merged, total=len(merged)):
         counter.update([normalize_text(token.text) for token in sent if len(normalize_text(token.text)) > 0])
         if tagner_on:

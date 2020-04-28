@@ -18,7 +18,6 @@ def evaluate(pred_prob, label):
     accuracy = sum(pred == label)/pred.shape[0]
     return accuracy
 
-
 def submit(path):
     tr_ans = [[], []]
     te_ans = [[], []]
@@ -46,12 +45,12 @@ def submit(path):
     pd.DataFrame(prediction_tr, columns=["tr_prob", "tr_pred"]).to_csv("tr.csv")
     pd.DataFrame(prediction_te, columns=['te_prob', "tr_pred"]).to_csv("te.csv")
 
-
 def predict():
     va_gen.reset()
     te_gen.reset()
     train_acc = 0
     test_acc = 0
+
     tr_loss = torch.Tensor(1).fill_(0)
     te_loss = torch.Tensor(1).fill_(0)
     n_eval = config['n_eval'] // config['batch_size']
@@ -62,6 +61,7 @@ def predict():
         prob = model(te_batch)
         test_acc += evaluate(prob, te_batch['label'])
         te_loss += torch.sum(criterion(prob, te_batch['label'])).detach().cpu()
+
     te_loss /= (i + 1)
 
     for i, va_batch in enumerate(va_gen):
@@ -75,10 +75,11 @@ def predict():
     train_acc /= n_eval
     test_acc /= len(te_gen)
     logger.info("Epoch: " + str(epc))
-    logger.info(name + "  train_acc: " + str(train_acc))
-    logger.info(name + "  test_acc: " + str(test_acc))
+    logger.info(name + "  train_no_answer_acc: " + str(train_acc))
+    logger.info(name + "  test_no_answer_acc: " + str(test_acc))
     logger.info(name + "  test_loss:" + str(te_loss.cpu().detach().numpy()))
     add_figure(name, writer, global_step, tr_loss, te_loss, train_acc, test_acc)
+    return test_acc
 
 
 if __name__ == "__main__":
@@ -106,6 +107,8 @@ if __name__ == "__main__":
 
     if config['cuda']:
         model.cuda()
+    best_acc = 0
+
     for epc in range(config['epochs']):
         for i, batch in tqdm(enumerate(generator), total=len(generator)):
             global_step += 1
@@ -116,8 +119,13 @@ if __name__ == "__main__":
             optimizer.step()
             optimizer.zero_grad()
             if i % 500 == 0:
-                predict()
+                current_ac = predict()
+                if current_ac > best_acc:
+                    best_acc = current_ac
+
         generator.reset()
+    
+    print ("The best No-Answer accuract rate is " + str(best_acc))
 
     writer.export_scalars_to_json("figures/{}.json".format(config['name']))
     writer.close()
