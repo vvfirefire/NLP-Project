@@ -15,11 +15,15 @@ sh download.sh
 python -m spacy download en
 ```
 ### Train the model on SQuAD 2.0 Dataset
-1. Data preprocessing
+1. File Convertion
+```ruby
+python convert.py
+```
+2. Data preprocessing
 ```ruby
 python preprocess.py
 ```
-2. Train the model
+3. Train the model
 ```ruby
 python train.py
 ```
