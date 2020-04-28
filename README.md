@@ -1,6 +1,6 @@
 ##### All the commands here are already included inside the submitted ipynb notebook file, here is only for clarification purpose
 
-# Quick Setup the environment 
+### Quick Setup the environment 
 1. Python 3.6
 2. Install environment 
 ```ruby
@@ -14,7 +14,7 @@ sh download.sh
 ```ruby
 python -m spacy download en
 ```
-# Train the model on SQuAD 2.0 Dataset
+### Train the model on SQuAD 2.0 Dataset
 1. Data preprocessing
 ```ruby
 python preprocess.py
