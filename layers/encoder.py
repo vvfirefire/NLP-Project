@@ -227,14 +227,12 @@ class LexiconEncoder(nn.Module):
             doc_elmo = None
             query_elmo = None
 
-        # doc_input_list.append(doc_elmo)
-        # query_input_list.append(query_elmo)
-
         # Append elmo
-        doc_input_list.append(doc_elmo[0])
-        doc_input_list.append(doc_elmo[1])
-        query_input_list.append(query_elmo[0])
-        query_input_list.append(query_elmo[1])
+        if self.elmo_on:
+            doc_input_list.append(doc_elmo[0])
+            doc_input_list.append(doc_elmo[1])
+            query_input_list.append(query_elmo[0])
+            query_input_list.append(query_elmo[1])
 
         doc_emb = torch.cat(doc_input_list, dim=2)
         query_emb = torch.cat(query_input_list, dim=2)

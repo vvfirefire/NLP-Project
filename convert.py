@@ -85,7 +85,7 @@ def main():
         data = json.load(f)
 
     qid, question, answer_sentence, answer, is_impossible = preprocess (data)
-    with open('squad_train_v.csv', mode='w') as replace_file:
+    with open('data/squad_train_v.csv', mode='w') as replace_file:
         file_writer = csv.writer(replace_file)
         file_writer.writerow(['id', 'question','answer_sentence', 'answer', 'is_impossible'])
         for i in range (len (question)):
@@ -95,7 +95,7 @@ def main():
         data_dev = json.load(f_dev)
 
     qid, question, answer_sentence, answer, is_impossible = preprocess (data_dev)
-    with open('squad_dev_v.csv', mode='w') as replace_file:
+    with open('data/squad_dev_v.csv', mode='w') as replace_file:
         file_writer = csv.writer(replace_file)
         file_writer.writerow(['id', 'question','answer_sentence', 'answer', 'is_impossible'])
         for i in range (len (question)):

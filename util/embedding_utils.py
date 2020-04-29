@@ -69,9 +69,10 @@ def build_data(data, vocab, tag_vocab, ner_vocab, char_vocab, fout, append_answe
         case['query_ner'] = build_ner_idx(query, ner_vocab)
         case['query_char'] = build_char_idx(query, char_vocab)
         case['is_impossible'] = bool(data['is_impossible'][i])
+
+        # Add ELMo
         doc_toks = [t.text for t in doc if len(t.text) > 0]
         query_toks = [t.text for t in query if len(t.text) > 0]
-        
         case['doc_ctok'] = doc_toks
         case['query_ctok'] = query_toks
 

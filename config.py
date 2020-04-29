@@ -52,10 +52,10 @@ def set_args():
     parser.add_argument('--elmo_config_path', default='data/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json')
     parser.add_argument('--elmo_weight_path', default='data/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5')
     parser.add_argument('--elmo_size', type=int, default=1024)
-    parser.add_argument('--elmo_lexicon_on', action='store_true', default=True)
+    # parser.add_argument('--elmo_lexicon_on', action='store_true', default=True)
     parser.add_argument('--elmo_att_on', action='store_true', default=True)
     parser.add_argument('--elmo_self_att_on', action='store_true', default=True)
-    parser.add_argument('--elmo_l2', type=float, default=0.001)
+    # parser.add_argument('--elmo_l2', type=float, default=0.001)
     parser.add_argument('--elmo_dropout', type=float, default=0.5)
 
     config = parser.parse_args().__dict__
